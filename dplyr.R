@@ -108,4 +108,6 @@ df_mtcars %>% filter(mpg >20) %>% sample_n(size = 5) %>% arrange(desc(mpg))
 results <- df_mtcars %>% filter(mpg >20) %>% sample_n(5) %>% arrange(desc(mpg))
 results
 
+dim(EPI_Data)
+
 
