@@ -75,9 +75,11 @@ summary(treeModel)
 rpart.plot(treeModel)
 plot(treeModel)
 
+help("randomForest")
+
 #Random Forest
 library(randomForest)
-rfModel <- randomForest(SALE.PRICE~SALE.DATE+YEAR.BUILT+GROSS.SQUARE.FEET+NTA, data = NYC_data3)
+rfModel <- randomForest(SALE.PRICE~SALE.DATE+YEAR.BUILT+GROSS.SQUARE.FEET+NTA, data = NYC_data3, importance = TRUE, keep.forest = TRUE)
 rfModel
 summary(rfModel)
 which.min(rfModel$mse) #min MSE at 169 trees
@@ -88,7 +90,7 @@ varImpPlot(rfModel)
 
 #Predictions
 pred1 <- data.frame(SALE.DATE=2010, YEAR.BUILT= 1900, GROSS.SQUARE.FEET= 5000,NTA='Lower East Side')
-as =predict(rfModel, newdata=pred1)
+predict(rfModel, newdata=pred1)
 #31467095
 
 pred2 <- data.frame(SALE.DATE=1930, YEAR.BUILT= 1920, GROSS.SQUARE.FEET= 3000,NTA='Lower East Side')
@@ -99,9 +101,5 @@ pred3 <- data.frame(SALE.DATE=2020, YEAR.BUILT= 2020, GROSS.SQUARE.FEET= 10000,N
 predict(rfModel, newdata=pred3)
 #79154845
 
-
-
-library(rfUtilities)
-rf.significance(rfModel, pred1a)
                 
 
